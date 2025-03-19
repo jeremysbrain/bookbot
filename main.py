@@ -1,3 +1,5 @@
+import sys
+
 from stats import count_words
 from stats import count_characters
 from stats import count_characters_sorted
@@ -25,19 +27,13 @@ def print_book_report(book_file):
     print("============= END ===============")
 
 def main():
-    book_dir = "books"
-    book_ext = ".txt"
-
-    book_title = "frankenstein"
     
-    #book_contents = get_book_text(f"{book_dir}/{book_title}{book_ext}")
-    #book_words = count_words(book_contents)
-    #print(f"{book_words} words found in the document")
-
-    #book_frankenstein_char_count = count_characters(book_contents)
-    #sorted_char_count = count_characters_sorted(book_frankenstein_char_count)
-    #print(sorted_char_count)
-
-    print_book_report(f"{book_dir}/{book_title}{book_ext}")
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    
+    book_path = sys.argv[1]
+    
+    print_book_report(book_path)
 
 main()
