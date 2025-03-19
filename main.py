@@ -7,13 +7,37 @@ def get_book_text(file_path):
         file_contents = f.read()
     return file_contents
 
-def main():
-    book_frankenstein_contents = get_book_text("books/frankenstein.txt")
-    book_frankenstein_words = count_words(book_frankenstein_contents)
-    print(f"{book_frankenstein_words} words found in the document")
+def print_book_report(book_file):
+    book_contents = get_book_text(book_file)
+    book_word_count = count_words(book_contents)
+    book_sorted_char_count = count_characters_sorted(count_characters(book_contents))
 
-    book_frankenstein_char_count = count_characters(book_frankenstein_contents)
-    sorted_char_count = count_characters_sorted(book_frankenstein_char_count)
-    print(sorted_char_count)
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {book_file}...")
+    print("----------- Word Count ----------")
+    print(f"Found {book_word_count} total words")
+    print("--------- Character Count -------")
+    for char in book_sorted_char_count:
+        character = char["character"]
+        count = char["count"]
+        if character.isalpha():
+            print(f"{character}: {count}")
+    print("============= END ===============")
+
+def main():
+    book_dir = "books"
+    book_ext = ".txt"
+
+    book_title = "frankenstein"
+    
+    #book_contents = get_book_text(f"{book_dir}/{book_title}{book_ext}")
+    #book_words = count_words(book_contents)
+    #print(f"{book_words} words found in the document")
+
+    #book_frankenstein_char_count = count_characters(book_contents)
+    #sorted_char_count = count_characters_sorted(book_frankenstein_char_count)
+    #print(sorted_char_count)
+
+    print_book_report(f"{book_dir}/{book_title}{book_ext}")
 
 main()
